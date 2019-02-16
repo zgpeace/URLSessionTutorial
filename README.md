@@ -9,7 +9,7 @@
 
 # URLSession功能概览
 URLSession以及一系列类实现HTTP/HTTPS请求。详情请参考[URLSession官方文档](https://developer.apple.com/documentation/foundation/urlsession)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190214095206939.png#pic_center)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190214095206939.png)
 >URLSessionConfiguration
 
 URLSession实现发送和接收HTTP请求. 你创建URLSession通过配置URLSessionConfiguration, URLSessionConfiguration主要有三个属性:
@@ -28,7 +28,7 @@ URLSessionTask是一个抽象类，表示一个任务对象. 一个session创建
 - URLSessionDataTask: 用于HTTP GET请求去服务器获取数据到内存.
 - URLSessionUploadTask: 用于把本地硬盘文件上传到web service, 通常通过HTTP POST 或者 PUT方法.
 - URLSessionDownloadTask: 用于从远处服务remote service下载文件到本地临时沙盒.
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190214103512755.png#pic_center)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190214103512755.png)
 你可以暂停suspend, 恢复resume 和 取消cancel 任务tasks. URLSessionDownloadTask还有额外的能力：为未来恢复future resumption设置暂停.
 
 通常, URLSession返回结果又两种方式: block方式completion handler, 或者是代理方法的方式（在创建session的时候设置delegate）.
@@ -38,7 +38,7 @@ URLSessionTask是一个抽象类，表示一个任务对象. 一个session创建
 
 # 🌰栗子工程下载
 点击[下载初始栗子工程](https://koenig-media.raywenderlich.com/uploads/2017/06/HalfTunes-Starter-1.zip)，它已经实现用api搜索歌曲，展示歌曲列表，网络服务类，辅助方法存储下载的歌曲，播放歌曲。这样子可以专注于实现网络特性去完善工程。栗子运行界面：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190214094831516.png#pic_center =300x500)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190214094831516.png)
 # Data Task
 创建Data Task，调用iTunes Search API去查询iTunes歌曲。
 
@@ -101,7 +101,7 @@ func getSearchResults(searchTerm: String, completion: @escaping QueryResult) {
 
 翻到类 `SearchVC+SearchBarDelegate.swift`  的方法 `searchBarSearchButtonClicked(_ searchBar: UISearchBar) ` 会执行查询成功后，关闭转菊花(表示请求结束), 存储结果到searchResults, 接着更新 table view. 
 运行程序，输入搜索字符串，搜索结果列表图如下：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190214151828650.png#pic_center =300x)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190214151828650.png)
 >注释: 默认的HTTP请求方法是GET. 如果要data task请求POST, PUT 或者 DELETE, 创建URLRequest，参数设置属性url,  HTTPMethod, 创建data task 请求参数为URLRequest, 而不是URL.
 
 # Download Task
@@ -249,7 +249,7 @@ if let index = download?.track.index {
 运行project > 搜索歌曲 > 点击下载 > 当下载完成 > 控制台打印歌曲路径:
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190215104629114.png)
 当下载按钮隐藏后，已经下载属性downloaded为true. 点击该歌曲，可以听到歌曲，有AVPlayerViewController播放界面:
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190215104815371.png#pic_center =300x)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190215104815371.png)
 # 暂停, 恢复 和 取消 下载
 这节实现下载过程中的控制：暂停，恢复，取消操作。
 
@@ -356,7 +356,7 @@ downloadButton.isHidden = downloaded || showDownloadControls
 
 ```
 运行项目，控制下载状态，如图：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190216114836122.png#pic_center =300x)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190216114836122.png)
 
 # 显示下载进度
 提高用户体验，显示下载进度条。有个session delegate很好地更新进度。
@@ -416,7 +416,7 @@ progressLabel.isHidden = !showDownloadControls
 下载进度条，和文件大小，只有在下载中才显示.
 
 运行project; 下载歌曲，将会看到下载的进度UI:
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190216155716922.png#pic_center)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190216155716922.png)
 # Background下载任务
 在Background下载任务，即使app运行在backgrouded，甚至crashed，下载任务任然继续。这在下载大文件的时候，是相当必要的功能.
 
@@ -500,7 +500,7 @@ extension SearchViewController: URLSessionDelegate {
 获取到app delegate已经保存的completion handler，并在主线程唤醒. 通过UIApplication 的shared delegate 引用 app delegate，所以需要引入UIKit.
 
 运行app; 点击几首歌下载(concurrent downloads), 点击Home键使app在background运行. 等待一会，你觉得已经下载完毕，则双击Home键，在app switcher中看下载状态，已经下载完成得以验证background session已经实现.
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190216164637928.png#pic_center =300x)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190216164637928.png)
 Apple music App已经完成。
 
 # 总结
